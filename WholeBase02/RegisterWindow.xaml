@@ -50,7 +50,7 @@
                 <Label x:Name="LabelName3">
                     <Button Margin="70 20 0 0" x:Name="Button_Register" Style="{StaticResource MaterialDesignFlatMidBgButton}" materialDesign:ShadowAssist.ShadowDepth="Depth0" Height="53" Width="300" materialDesign:ButtonAssist.CornerRadius="10"   
                                     
-                        FontSize="18" Content="Зареєструвати"/>
+                        FontSize="18" Content="Зареєструвати" Click="Button_Register_Click"/>
                 </Label >
                 <Label x:Name="LabelName4">
                     <Button Margin=" 70 20 0 0" x:Name="Button_Enter_Auth_Account" Style="{StaticResource MaterialDesignFlatButton}" materialDesign:ShadowAssist.ShadowDepth="Depth0" Height="53" Width="300" materialDesign:ButtonAssist.CornerRadius="10" 

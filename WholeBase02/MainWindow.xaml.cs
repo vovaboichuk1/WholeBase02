@@ -83,10 +83,49 @@ namespace WholeBase02
 
         private void Enter_account_Click(object sender, RoutedEventArgs e)
         {
-            MasterWindow masterWindow = new MasterWindow();
-            masterWindow.Show();
-            Hide();
+            string name = TextBoxUserName.Text;
+            string password = TextBoxPassword.Password;
 
+            if (name.Length < 4)
+            {
+                TextBoxUserName.ToolTip = "Мінімум 4 символи";
+                TextBoxUserName.Background = Brushes.IndianRed;
+            }
+            else if (password.Length < 6)
+            {
+               TextBoxPassword.ToolTip = "Мінімум 6 символів";
+                TextBoxPassword.Background = Brushes.IndianRed;
+            }
+            else
+            {
+               TextBoxUserName.ToolTip = "";
+                TextBoxUserName.Background = Brushes.Transparent;
+
+               TextBoxPassword.ToolTip = "";
+                TextBoxPassword.Background = Brushes.Transparent;
+
+
+                User AuthUser = null;
+                using (AppContext db = new AppContext())
+                {
+                    AuthUser = db.Users.Where(b => b.Name == name && b.Password == password).FirstOrDefault();
+                }
+                if (AuthUser != null)
+                {
+                    MasterWindow masterWindow = new MasterWindow();
+                    masterWindow.Show();
+                    Hide();
+
+
+                }
+                else
+                {
+                    MessageBox.Show("Введено не коректно дані");
+                }
+
+
+
+            }
         }
     }
 }

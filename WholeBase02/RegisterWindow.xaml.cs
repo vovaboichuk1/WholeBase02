@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -20,9 +21,13 @@ namespace WholeBase02
     /// </summary>
     public partial class RegisterWindow : Window
     {
+        AppContext db;
+
         public RegisterWindow()
         {
             InitializeComponent();
+
+            db = new AppContext();
         }
 
         public bool IsDarkTheme { get; set; }
@@ -70,10 +75,44 @@ namespace WholeBase02
         }
         private void Button_Enter_Auth_Account_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow authWindow = new  MainWindow();
+
+            MainWindow authWindow = new MainWindow();
             authWindow.Show();
             Hide();
         }
 
+        private void Button_Register_Click(object sender, RoutedEventArgs e)
+        {
+            string name = TextBoxUserName.Text;
+            string password = TextBoxPassword.Password;
+
+
+            if (name.Length < 4)
+            {
+                TextBoxUserName.ToolTip = "Мінімум 4 символи";
+                TextBoxUserName.Background = Brushes.IndianRed;
+            }
+            else if (password.Length < 6)
+            {
+                TextBoxPassword.ToolTip = "Мінімум 6 символів";
+                TextBoxPassword.Background = Brushes.IndianRed;
+            }
+            else
+            {
+                TextBoxUserName.ToolTip = "";
+                TextBoxUserName.Background = Brushes.Transparent;
+
+                TextBoxPassword.ToolTip = "";
+                TextBoxPassword.Background = Brushes.Transparent;
+
+                User user = new User(name, password);
+                db.Users.Add(user);
+                db.SaveChanges();
+
+                MainWindow authWindow = new MainWindow();
+                authWindow.Show();
+                Hide();
+            }
+        }
     }
 }
