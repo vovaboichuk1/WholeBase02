@@ -112,6 +112,7 @@ namespace WholeBase02
                 MainWindow authWindow = new MainWindow();
                 authWindow.Show();
                 Hide();
+                //fgdgfgfgfgf
             }
         }
     }
