@@ -83,7 +83,9 @@ namespace WholeBase02
 
         private void Enter_account_Click(object sender, RoutedEventArgs e)
         {
-            
+            MasterWindow masterWindow = new MasterWindow();
+            masterWindow.Show();
+            Hide();
 
         }
     }
